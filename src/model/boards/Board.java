@@ -91,6 +91,36 @@ public abstract class Board {
     }
 
     public boolean hasPlayerWon(Player player) {
+        return this.hasPlayerWonByRows(player) || this.hasPlayerWonByCols(player) ||
+                this.hasPlayerWonByDiags(player);
+    }
+
+    public boolean hasPlayerWonByRows(Player player) {
+        boolean hasPlayerWon;
+
+        for (int i = 0; i < this.size(); i++) {
+            hasPlayerWon = true;
+            for (int j = 0; j < this.size(); j++) {
+                if (this.getCharAt(i, j) != player.getRepresentation()) {
+                    hasPlayerWon = false;
+                }
+            }
+
+            if (hasPlayerWon) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public boolean hasPlayerWonByCols(Player player) {
+        // TODO: Implement
+        return false;
+    }
+
+    public boolean hasPlayerWonByDiags(Player player) {
+        // TODO: Implement
         return false;
     }
 

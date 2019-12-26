@@ -182,5 +182,40 @@ public class BoardTest {
 
         assertTrue(board.hasPlayerWon(board.getPlayerTwo()));
     }
+
+    /**
+     * wonByRows tests
+     */
+    @Test
+    public void testHasPlayerWonByRowsFalse() {
+        assertFalse(board.hasPlayerWonByRows(board.getPlayerOne()));
+    }
+
+    @Test
+    public void testHasPlayerWonByRowsTrueWonByTopRow() {
+        board.makeMove(new Move(0, 0), board.getPlayerOne());
+        board.makeMove(new Move(0, 1), board.getPlayerOne());
+        board.makeMove(new Move(0, 2), board.getPlayerOne());
+
+        assertTrue(board.hasPlayerWonByRows(board.getPlayerOne()));
+    }
+
+    @Test
+    public void testHasPlayerWonByRowsTrueWonByMiddleRow() {
+        board.makeMove(new Move(1, 0), board.getPlayerTwo());
+        board.makeMove(new Move(1, 1), board.getPlayerTwo());
+        board.makeMove(new Move(1, 2), board.getPlayerTwo());
+
+        assertTrue(board.hasPlayerWonByRows(board.getPlayerTwo()));
+    }
+
+    @Test
+    public void testHasPlayerWonByRowsTrueWonByBottomRow() {
+        board.makeMove(new Move(2, 0), board.getPlayerOne());
+        board.makeMove(new Move(2, 1), board.getPlayerOne());
+        board.makeMove(new Move(2, 2), board.getPlayerOne());
+
+        assertTrue(board.hasPlayerWonByRows(board.getPlayerOne()));
+    }
 }
 

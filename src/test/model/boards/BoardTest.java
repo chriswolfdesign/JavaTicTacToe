@@ -130,5 +130,57 @@ public class BoardTest {
         board.makeMove(new Move(2, 1), board.getPlayerOne());
         board.makeMove(new Move(2, 2), board.getPlayerTwo());
     }
+
+    /**
+     * getWinningPlayerTests
+     */
+    @Test
+    public void getWinningPlayerNoPlayerHasWon() {
+        assertNull(board.getWinningPlayer());
+    }
+
+    @Test
+    public void getWinningPlayerPlayerOneWon() {
+        board.makeMove(new Move(0, 0), board.getPlayerOne());
+        board.makeMove(new Move(1, 1), board.getPlayerOne());
+        board.makeMove(new Move(2, 2), board.getPlayerOne());
+
+        assertEquals(board.getWinningPlayer(), board.getPlayerOne());
+    }
+
+    @Test
+    public void getWinningPlayerPlayerTwoHasWon() {
+        board.makeMove(new Move(2, 0), board.getPlayerTwo());
+        board.makeMove(new Move(1, 1), board.getPlayerTwo());
+        board.makeMove(new Move(0, 2), board.getPlayerTwo());
+
+        assertEquals(board.getWinningPlayer(), board.getPlayerTwo());
+    }
+
+    /**
+     * hasPlayerWonTests
+     */
+    @Test
+    public void hasPlayerWonFalse() {
+        assertFalse(board.hasPlayerWon(board.getPlayerOne()));
+    }
+
+    @Test
+    public void hasPlayerWonPlayerOneHasWon() {
+        board.makeMove(new Move(0, 0), board.getPlayerOne());
+        board.makeMove(new Move(0, 1), board.getPlayerOne());
+        board.makeMove(new Move(0, 2), board.getPlayerOne());
+
+        assertTrue(board.hasPlayerWon(board.getPlayerOne()));
+    }
+
+    @Test
+    public void hasPlayerWonPlayerTwoHasWon() {
+        board.makeMove(new Move(0, 0), board.getPlayerTwo());
+        board.makeMove(new Move(1, 0), board.getPlayerTwo());
+        board.makeMove(new Move(2, 0), board.getPlayerTwo());
+
+        assertTrue(board.hasPlayerWon(board.getPlayerTwo()));
+    }
 }
 

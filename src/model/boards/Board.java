@@ -79,8 +79,19 @@ public abstract class Board {
     }
 
     public Player getWinningPlayer() {
-        // TODO: Implement
+        if (this.hasPlayerWon(this.getPlayerOne())) {
+            return this.getPlayerOne();
+        }
+
+        if (this.hasPlayerWon(this.getPlayerTwo())) {
+            return this.getPlayerTwo();
+        }
+
         return null;
+    }
+
+    public boolean hasPlayerWon(Player player) {
+        return false;
     }
 
 }

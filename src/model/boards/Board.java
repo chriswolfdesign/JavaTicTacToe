@@ -61,7 +61,17 @@ public abstract class Board {
     }
 
     public boolean isGameOver() {
-        // TODO: Implement
-        return false;
+        return this.remainingSquares() == 0 || this.getWinningPlayer() != null;
     }
+
+    public int remainingSquares() {
+        // TODO: Implement
+        return 0;
+    }
+
+    public Player getWinningPlayer() {
+        // TODO: Implement
+        return null;
+    }
+
 }

@@ -71,15 +71,7 @@ public class BoardTest {
 
     @Test
     public void isGameOverTrueNoSquaresRemaining() {
-        board.makeMove(new Move(0, 0), board.getPlayerOne());
-        board.makeMove(new Move(0, 1), board.getPlayerTwo());
-        board.makeMove(new Move(0, 2), board.getPlayerOne());
-        board.makeMove(new Move(1, 0), board.getPlayerOne());
-        board.makeMove(new Move(1, 1), board.getPlayerTwo());
-        board.makeMove(new Move(1, 2), board.getPlayerOne());
-        board.makeMove(new Move(2, 0), board.getPlayerTwo());
-        board.makeMove(new Move(2, 1), board.getPlayerOne());
-        board.makeMove(new Move(2, 2), board.getPlayerTwo());
+        setupFullBoard();
 
         assertTrue(board.isGameOver());
     }
@@ -100,6 +92,43 @@ public class BoardTest {
         board.makeMove(new Move(2, 0), board.getPlayerTwo());
 
         assertTrue(board.isGameOver());
+    }
+
+    /**
+     * remainingSquares tests
+     */
+    @Test
+    public void remainingSquaresEmptyBoard() {
+        assertEquals(board.remainingSquares(), 9);
+    }
+
+    @Test
+    public void remainingSquaresPartiallyFilledBoard() {
+        board.makeMove(new Move(0, 0), board.getPlayerOne());
+        board.makeMove(new Move(0, 2), board.getPlayerTwo());
+        board.makeMove(new Move(2, 0), board.getPlayerOne());
+        board.makeMove(new Move(2, 2), board.getPlayerTwo());
+
+        assertEquals(board.remainingSquares(), 5);
+    }
+
+    @Test
+    public void remainingSquaresFilledBoard() {
+        setupFullBoard();
+
+        assertEquals(board.remainingSquares(), 0);
+    }
+
+    private void setupFullBoard() {
+        board.makeMove(new Move(0, 0), board.getPlayerOne());
+        board.makeMove(new Move(0 ,1), board.getPlayerTwo());
+        board.makeMove(new Move(0, 2), board.getPlayerOne());
+        board.makeMove(new Move(1, 0), board.getPlayerOne());
+        board.makeMove(new Move(1, 1), board.getPlayerTwo());
+        board.makeMove(new Move(1, 2), board.getPlayerOne());
+        board.makeMove(new Move(2, 0), board.getPlayerTwo());
+        board.makeMove(new Move(2, 1), board.getPlayerOne());
+        board.makeMove(new Move(2, 2), board.getPlayerTwo());
     }
 }
 

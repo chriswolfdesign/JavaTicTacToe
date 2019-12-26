@@ -65,8 +65,17 @@ public abstract class Board {
     }
 
     public int remainingSquares() {
-        // TODO: Implement
-        return 0;
+        int remainingSquares = 0;
+
+        for (int i = 0; i < this.size(); i++) {
+            for (int j = 0; j < this.size(); j++) {
+                if (this.getCharAt(i, j) == ' ') {
+                    remainingSquares++;
+                }
+            }
+        }
+
+        return remainingSquares;
     }
 
     public Player getWinningPlayer() {

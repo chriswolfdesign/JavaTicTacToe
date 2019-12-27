@@ -5,7 +5,18 @@ import model.players.HumanPlayer;
 import model.players.Player;
 import model.players.PlayerOptions;
 
+/**
+ * TwoHumanBoard.java
+ *
+ * A board designed to be played by two human players
+ *
+ * @author Chris Wolf
+ * @version 1.0.0 (December 27, 2019)
+ */
 public class TwoHumanBoard extends Board {
+    /**
+     * Constructor
+     */
     public TwoHumanBoard() {
         super();
         Player playerOne = PlayerFactory.generatePlayer(PlayerOptions.HUMAN_PLAYER,

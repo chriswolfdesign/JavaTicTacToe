@@ -8,6 +8,14 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+/**
+ * BoardTest.java
+ *
+ * Unit testing for Board.java
+ *
+ * @author Chris Wolf
+ * @version 1.0.0 (December 27, 2019)
+ */
 public class BoardTest {
     Board board;
 

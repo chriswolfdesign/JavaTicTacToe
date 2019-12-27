@@ -4,13 +4,28 @@ import factories.BoardFactory;
 import model.boards.Board;
 import model.boards.BoardOptions;
 
+/**
+ * CLIGame.java
+ *
+ * A version of this game to be played on the command line
+ *
+ * @author Chris Wolf
+ * @version 1.0.0 (December 27, 2019)
+ */
 public class CLIGame implements Game {
+    /** the board this game will be played on */
     private Board board;
 
+    /**
+     * Constructor
+     */
     public CLIGame() {
         this.board = BoardFactory.generateBoard(BoardOptions.TWO_HUMANS);
     }
 
+    /**
+     * Runs the game
+     */
     public void run() {
         while(!this.board.isGameOver()) {
             this.drawBoard();
@@ -30,6 +45,9 @@ public class CLIGame implements Game {
         }
     }
 
+    /**
+     * Draws the board to the terminal
+     */
     public void drawBoard() {
         System.out.print("   ");
         for (int i = 0; i < this.board.size(); i++) {

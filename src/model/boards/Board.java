@@ -7,13 +7,14 @@ import org.jetbrains.annotations.NotNull;
 public abstract class Board {
     private Player playerOne;
     private Player playerTwo;
-    private Player CurrentPlayer;
+    private Player currentPlayer;
     private char[][] grid;
     private static final int GRID_SIZE = 3;
 
     public Board() {
         this.grid = new char[GRID_SIZE][GRID_SIZE];
         this.initializeGrid();
+        this.setCurrentPlayer(this.playerOne);
     }
 
     public Player getPlayerOne() {
@@ -33,11 +34,11 @@ public abstract class Board {
     }
 
     public Player getCurrentPlayer() {
-        return CurrentPlayer;
+        return currentPlayer;
     }
 
     public void setCurrentPlayer(Player currentPlayer) {
-        CurrentPlayer = currentPlayer;
+        this.currentPlayer = currentPlayer;
     }
 
     public int size() {
@@ -58,6 +59,16 @@ public abstract class Board {
 
     public void makeMove(@NotNull Move move, @NotNull Player player) {
         this.grid[move.getRow()][move.getCol()] = player.getRepresentation();
+    }
+
+    public void playerMakeMove() {
+        Move move;
+
+        do {
+            move = this.getCurrentPlayer().proposeMove();
+        } while (!this.isValidMove(move));
+
+        this.makeMove(move, this.getCurrentPlayer());
     }
 
     public boolean isGameOver() {
@@ -95,7 +106,7 @@ public abstract class Board {
                 this.hasPlayerWonByDiags(player);
     }
 
-    public boolean hasPlayerWonByRows(Player player) {
+    private boolean hasPlayerWonByRows(Player player) {
         boolean hasPlayerWon;
 
         for (int i = 0; i < this.size(); i++) {
@@ -114,14 +125,68 @@ public abstract class Board {
         return false;
     }
 
-    public boolean hasPlayerWonByCols(Player player) {
-        // TODO: Implement
+    private boolean hasPlayerWonByCols(Player player) {
+        boolean hasPlayerWon;
+
+        for (int i = 0; i < this.size(); i++) {
+            hasPlayerWon = true;
+            for (int j = 0; j < this.size(); j++) {
+                if (this.getCharAt(j, i) != player.getRepresentation()) {
+                    hasPlayerWon = false;
+                }
+            }
+
+            if (hasPlayerWon) {
+                return true;
+            }
+        }
+
         return false;
     }
 
-    public boolean hasPlayerWonByDiags(Player player) {
-        // TODO: Implement
-        return false;
+    private boolean hasPlayerWonByDiags(Player player) {
+        return this.hasPlayerWonByTopLeftBottomRightDiag(player) ||
+                this.hasPlayerWonByTopRightBottomLeftDiag(player);
+    }
+
+    private boolean hasPlayerWonByTopRightBottomLeftDiag(Player player) {
+        for (int i = 0; i < this.size(); i++) {
+            if (this.getCharAt(i, (this.size() - i - 1)) != player.getRepresentation()) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private boolean hasPlayerWonByTopLeftBottomRightDiag(Player player) {
+        for (int i = 0; i < this.size(); i++) {
+            if (this.getCharAt(i, i) != player.getRepresentation()) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public boolean isValidMove(Move move) {
+        if (move.getRow() < 0 || move.getRow() >= this.size()) {
+            return false;
+        }
+
+        if (move.getCol() < 0 || move.getCol() >= this.size()) {
+            return false;
+        }
+
+        return this.getCharAt(move.getRow(), move.getCol()) == ' ';
+    }
+
+    public void shiftPlayers() {
+        if (this.getCurrentPlayer().equals(this.getPlayerOne())) {
+            this.currentPlayer = this.playerTwo;
+        } else {
+            this.currentPlayer = this.playerOne;
+        }
     }
 
 }

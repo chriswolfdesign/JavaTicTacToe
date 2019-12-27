@@ -12,7 +12,22 @@ public class CLIGame implements Game {
     }
 
     public void run() {
+        while(!this.board.isGameOver()) {
+            this.drawBoard();
+
+            System.out.println("Current Player: " + this.board.getCurrentPlayer());
+
+            this.board.playerMakeMove();
+            this.board.shiftPlayers();
+        }
+
         this.drawBoard();
+
+        if (this.board.getWinningPlayer() == null) {
+            System.out.println("It was a tie!!!");
+        } else {
+            System.out.println(this.board.getWinningPlayer() + " wins!!!");
+        }
     }
 
     public void drawBoard() {

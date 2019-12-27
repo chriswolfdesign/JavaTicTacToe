@@ -1,7 +1,6 @@
 package model.boards;
 
 import factories.PlayerFactory;
-import model.players.HumanPlayer;
 import model.players.Player;
 import model.players.PlayerOptions;
 

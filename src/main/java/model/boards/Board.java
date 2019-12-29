@@ -2,7 +2,6 @@ package model.boards;
 
 import model.moves.Move;
 import model.players.Player;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * Board.java
@@ -120,7 +119,7 @@ public abstract class Board {
    * @param move the space the user would like to make the move on
    * @param player the player making the move
    */
-  public void makeMove(@NotNull Move move, @NotNull Player player) {
+  public void makeMove(Move move, Player player) {
     this.grid[move.getRow()][move.getCol()] = player.getRepresentation();
   }
 
@@ -305,6 +304,9 @@ public abstract class Board {
     return this.getCharAt(move.getRow(), move.getCol()) == ' ';
   }
 
+  /**
+   * Switches from playerOne to playerTwo or vice-versax
+   */
   public void shiftPlayers() {
     if (this.getCurrentPlayer().equals(this.getPlayerOne())) {
       this.currentPlayer = this.playerTwo;

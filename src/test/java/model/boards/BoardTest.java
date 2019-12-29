@@ -1,4 +1,4 @@
-package test.model.boards;
+package model.boards;
 
 import model.boards.Board;
 import model.boards.TwoHumanBoard;
